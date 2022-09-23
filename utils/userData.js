@@ -1,0 +1,38 @@
+const usernames = [
+	'David',
+	'Alex',
+	'Maria',
+	'Anna',
+	'Marco',
+	'Antonio',
+	'Daniel',
+	'Andrea',
+	'Laura',
+	'Ali',
+	'Jose',
+	'Sandra',
+	'Sara',
+	'Carlos',
+	'Ana',
+	'Michael',
+	'Marie',
+	'Francesco',
+	'Mehmet',
+	'Marta',
+	'Sarah',
+	'John',
+	'Luca',
+	'Martin',
+	'Murat',
+	'Mario',
+	'Juan',
+	'Thomas',
+	'Giuseppe',
+	'Chris',
+	'Peter',
+	'Mustafa',
+];
+
+module.exports = {
+	usernames
+}
