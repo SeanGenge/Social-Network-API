@@ -16,14 +16,14 @@ const getSingleUser = (req, res) => {
 		.catch((err) => res.status(500).json(err));
 };
 
-// const createUser = (req, res) => {
-// 	User.create(req.body)
-// 		.then((dbPostData) => res.json(dbPostData))
-// 		.catch((err) => res.status(500).json(err));
-// }
+const createUser = (req, res) => {
+	User.create(req.body)
+		.then((dbUserData) => res.json(dbUserData))
+		.catch((err) => res.status(500).json(err));
+}
 
 module.exports = {
 	getUsers,
 	getSingleUser,
-	// createUser
+	createUser
 };
