@@ -29,7 +29,7 @@ connection.once('open', async () => {
 		
 		thoughts.push({
 			thoughtText: thoughtText[i],
-			reactions: thoughtReactions
+			//reactions: thoughtReactions
 			// username: getRandomValue(usernames),
 			// reactions: thoughtReactions
 		});
