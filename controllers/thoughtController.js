@@ -1,4 +1,4 @@
-const { Thought } = require('../models');
+const { Thought, User } = require('../models');
 
 const getThoughts = (req, res) => {
 	Thought.find()
@@ -16,19 +16,41 @@ const getThoughtById = (req, res) => {
 		.catch((err) => res.status(500).json(err));
 };
 
-const createThought = (req, res) => {
-	Thought.create(req.body)
-		.then((thought) => res.json(thought))
+const createThought = async (req, res) => {
+	const { userId, ...rest } = req.body;
+	
+	const thought = await Thought.create(rest)
 		.catch((err) => res.status(500).json(err));
+		
+	// Add the thought to the user array using the userId. If not it will match by name
+	if (userId) {
+		User.findOneAndUpdate({ _id: userId }, {
+			$push: {
+				thoughts: thought._id
+			}
+		})
+			.catch((err) => res.status(500).json(err));
+	}
+	else {
+		// Find the first match and update by username
+		User.findOneAndUpdate({ usernamee: rest.username }, {
+			$push: {
+				thoughts: thought._id
+			}
+		})
+			.catch((err) => res.status(500).json(err));
+	}
+	
+	res.json(thought);
 };
 
-const deleteUser = (req, res) => {
+const deleteThought = (req, res) => {
 	Thought.deleteOne({ _id: req.params.thoughtId })
 		.then((thought) => res.json(thought))
 		.catch((err) => res.status(500).json(err));
 };
 
-const updateUser = (req, res) => {
+const updateThought = (req, res) => {
 	Thought.updateOne({ _id: req.params.thoughtId }, req.body)
 		.then((thought) => res.json(thought))
 		.catch((err) => res.status(500).json(err));
@@ -37,5 +59,7 @@ const updateUser = (req, res) => {
 module.exports = {
 	getThoughts,
 	getThoughtById,
-	createThought
+	createThought,
+	updateThought,
+	deleteThought
 };
